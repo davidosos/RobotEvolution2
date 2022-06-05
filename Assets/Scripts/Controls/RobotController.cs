@@ -33,6 +33,10 @@ public class RobotController : MonoBehaviour
 
     private void Update()
     {
+        if (MenuManager.isUIOpen)
+        {
+            return;
+        }
         //horizontal = 0;
         vertical = 0;
         if (Input.GetKey(KeyCode.A) && horizontal <= 1)

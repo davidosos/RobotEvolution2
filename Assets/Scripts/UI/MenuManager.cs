@@ -7,6 +7,8 @@ public class MenuManager : MonoBehaviour
     public MenuItem[] items;
     [HideInInspector]
     public MenuItem currentItem;
+    public static bool isUIOpen = false;
+    public static bool isTyping = false;
 
     public static MenuManager _instance;
 
@@ -25,17 +27,25 @@ public class MenuManager : MonoBehaviour
 
     private void Update()
     {
-        foreach(MenuItem mItem in items)
+        if (!isTyping)
         {
-            if (Input.GetKeyDown(mItem.triggerKey))
+            foreach (MenuItem mItem in items)
             {
-                mItem.gameObject.SetActive(!mItem.gameObject.activeSelf);
-                if (mItem.gameObject.activeSelf)
+                if (Input.GetKeyDown(mItem.triggerKey))
                 {
+                    mItem.gameObject.SetActive(true);
                     currentItem = mItem;
                     DisableInactive();
                 }
             }
+        }
+        if (currentItem != null)
+        {
+            isUIOpen = currentItem.gameObject.activeSelf;
+        }
+        else
+        {
+            isUIOpen = false;
         }
     }
 

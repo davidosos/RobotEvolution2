@@ -56,7 +56,7 @@ public class RobotConstructor : MonoBehaviour
 
         ApplyStatusChange(pool.statChange);
     }
-    void ApplyStatusChange(int statusChange)
+    public void ApplyStatusChange(int statusChange)
     {
         if(statusChange == 0)
         {
