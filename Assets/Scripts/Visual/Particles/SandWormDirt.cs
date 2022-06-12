@@ -5,24 +5,29 @@ using UnityEngine;
 //Creates particles on terrain
 public class SandWormDirt : MonoBehaviour
 {
-    private GameObject particles;
+    private ParticleSystem particles;
+    private TerrainCollider coll;
+
+    int origRate;
 
     private void Start()
     {
-        particles = Instantiate(Resources.Load<GameObject>("Particles/SandParticles"));
+        particles = Instantiate(Resources.Load<GameObject>("Particles/SandParticles")).GetComponent<ParticleSystem>();
+        coll = GameObject.Find("Terrain").GetComponent<TerrainCollider>();
     }
 
     private void FixedUpdate()
     {
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, Vector3.up, out hit, float.MaxValue, LayerMask.NameToLayer("Terrain")))
+        Ray r = new Ray(new Vector3(transform.position.x, 10000, transform.position.z), -Vector3.up);
+        if(coll.Raycast(r, out hit, 10000 - transform.position.y))
         {
-            particles.SetActive(true);
+            particles.Play();
             particles.transform.position = hit.point;
         }
         else
         {
-            particles.SetActive(false);
+            particles.Stop();
         }
     }
 }

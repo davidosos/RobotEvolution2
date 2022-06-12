@@ -15,11 +15,6 @@ public class TrackMovement : MonoBehaviour
     }
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.transform.root == transform.root)
-        {
-            Physics.IgnoreCollision(GetComponent<Collider>(), collision.collider);
-            return;
-        }
         GameObject trackPart = collision.GetContact(0).thisCollider.gameObject;
         float frontSpeed = Vector3.Dot(rigid.velocity, transform.forward);
         if (trackPart.transform.CompareTag("TrackPart") && frontSpeed <= maxSpeed && frontSpeed >= -maxSpeed)

@@ -5,7 +5,9 @@ using UnityEngine;
 public class CamPivot : MonoBehaviour
 {
     public float sens;
-    public float maxDist = 4.5f;
+    public float minDist = 4.5f;
+    public float maxDist = 22.5f;
+    public float dist = 0;
 
     public GameObject cam;
     public RobotController controller;
@@ -13,10 +15,12 @@ public class CamPivot : MonoBehaviour
     private void Start()
     {
         controller = transform.root.GetComponent<RobotController>();
+        dist = minDist;
     }
 
     private void Update()
     {
+        dist = Mathf.Clamp(dist - Input.mouseScrollDelta.y * 0.5f, minDist, maxDist);
         if (controller == null || controller.isConscious)
         {
             cam.GetComponent<Camera>().enabled = true;
@@ -27,13 +31,13 @@ public class CamPivot : MonoBehaviour
 
             RaycastHit hit;
             int layer = ~LayerMask.GetMask("Robot");
-            if (Physics.Raycast(transform.position, -transform.forward, out hit, maxDist, layer))
+            if (Physics.Raycast(transform.position, -transform.forward, out hit, dist, layer))
             {
                 cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, -hit.distance);
             }
             else
             {
-                cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, -maxDist);
+                cam.transform.localPosition = new Vector3(cam.transform.localPosition.x, cam.transform.localPosition.y, -dist);
             }
         }
         else

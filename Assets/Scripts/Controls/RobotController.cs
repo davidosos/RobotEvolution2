@@ -15,8 +15,11 @@ public class RobotController : MonoBehaviour
 
     public bool isConscious;
 
+    Vector3 startPos;
+
     private void Start()
     {
+        startPos = transform.position;
         rigid = GetComponent<Rigidbody>();
         if(GameObject.FindGameObjectsWithTag("Robot").Length > 1)
         {
@@ -37,23 +40,20 @@ public class RobotController : MonoBehaviour
         {
             return;
         }
-        //horizontal = 0;
+        if (!MenuManager.isTyping && Input.GetKeyDown(KeyCode.R))
+        {
+            transform.position = startPos;
+            transform.rotation = Quaternion.identity;
+        }
+        horizontal = 0;
         vertical = 0;
-        if (Input.GetKey(KeyCode.A) && horizontal <= 1)
+        if (Input.GetKey(KeyCode.A))
         {
-            horizontal += 0.2f;
+            horizontal += 1;
         }
-        if (Input.GetKey(KeyCode.D) && horizontal >= -1)
+        if (Input.GetKey(KeyCode.D))
         {
-            horizontal -= 0.2f;
-        }
-        if(horizontal > 0)
-        {
-            horizontal -= 0.1f;
-        }
-        if (horizontal < 0)
-        {
-            horizontal += 0.1f;
+            horizontal -= 1;
         }
         if (Input.GetKey(KeyCode.W))
         {

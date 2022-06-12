@@ -128,6 +128,21 @@ public class BetaGenePicker : MonoBehaviour
         //Apply changes
         current = GetModifiedGenePool();
         //Actually create the egg
-        Instantiate(Resources.Load<GameObject>("Basic_Egg")).GetComponent<Egg>().pool = current;
+        GameObject egg = Instantiate(Resources.Load<GameObject>("Basic_Egg"));
+        egg.GetComponent<Egg>().pool = current;
+        //Not final
+        Vector3 robPos = FindConscious().gameObject.transform.position;
+        egg.transform.position = new Vector3(robPos.x, robPos.y + 10, robPos.z);
+    }
+    static RobotController FindConscious() 
+    {
+        foreach(RobotController c in FindObjectsOfType<RobotController>())
+        {
+            if (c.isConscious)
+            {
+                return c;
+            }
+        }
+        return null;
     }
 }

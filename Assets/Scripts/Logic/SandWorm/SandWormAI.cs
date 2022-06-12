@@ -5,6 +5,7 @@ using UnityEngine;
 public class SandWormAI : MonoBehaviour
 {
     public GameObject target;
+    public GameObject currentlyFollowing { get; private set; }
     public GameObject[] undergroundPath;
     private int underIndex = 0;
     public GameObject homeEntrance;
@@ -16,11 +17,11 @@ public class SandWormAI : MonoBehaviour
     public float visibleRadius;
     public float wayPointAcceptDist = 2f;
 
-    private List<GameObject> ignored;
+    public List<GameObject> ignored;
     private GameObject head;
 
-    [HideInInspector]
     public GameObject held;
+    public Rigidbody heldRigid;
 
     private void Start()
     {
@@ -30,7 +31,10 @@ public class SandWormAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        target = GetClosestPrey(visibleRadius);
+        if (Input.GetKeyDown(KeyCode.R) && !MenuManager.isTyping)
+        {
+            ignored = new List<GameObject>();
+        }
         if (target != null)
         {
             Follow(target);
@@ -79,6 +83,7 @@ public class SandWormAI : MonoBehaviour
                         {
                             held.GetComponent<Rigidbody>().isKinematic = false;
                         }
+                        heldRigid = null;
                         ignored.Add(held);
                         held = null;
                     }
@@ -89,6 +94,7 @@ public class SandWormAI : MonoBehaviour
 
     void Follow(GameObject o)
     {
+        currentlyFollowing = o;
         head.transform.rotation = Quaternion.Lerp(head.transform.rotation, XLookRotation(o.transform.position - head.transform.position), 0.1f);
 
         float dist = Vector3.Distance(head.transform.position, o.transform.position);
@@ -97,34 +103,12 @@ public class SandWormAI : MonoBehaviour
         Debug.DrawLine(head.transform.position, head.transform.right);
     }
 
-    //Returns null if no object is found
-    GameObject GetClosestPrey(float radius)
+    private void OnCollisionEnter(Collision collision)
     {
-        GameObject closest = null;
-        float lastDist = float.MaxValue;
-        foreach(Collider coll in Physics.OverlapSphere(transform.position, radius))
+        if(collision.rigidbody == heldRigid)
         {
-            Vector3 pos = coll.transform.position;
-            if ((coll.transform.root.tag == "Prey" || coll.transform.root.tag == "Robot") && !ignored.Contains(coll.transform.root.gameObject))
-            {
-                if (new Vector3(pos.x - transform.position.x, 0, pos.z - transform.position.z).magnitude < 5 && pos.y > transform.position.y)
-                { 
-                    if (closest == null)
-                    {
-                        closest = coll.transform.root.gameObject;
-                    }
-                    else
-                    {
-                        float dist = Vector3.Distance(coll.transform.root.position, transform.position);
-                        if (dist < lastDist)
-                        {
-                            closest = coll.transform.root.gameObject;
-                        }
-                    }
-                }
-            }
+            Physics.IgnoreCollision(collision.collider, collision.GetContact(0).thisCollider);
         }
-        return closest;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -132,12 +116,14 @@ public class SandWormAI : MonoBehaviour
         if(other.transform.root.gameObject == target)
         {
             Rigidbody r = other.transform.root.GetComponent<Rigidbody>();
-            other.transform.root.parent = head.transform;
-            other.transform.root.localPosition = new Vector3(10.8f, 0, 0);
+            Transform o = other.transform.root;
             if (r != null)
             {
+                heldRigid = r;
                 r.isKinematic = true;
             }
+            o.parent = head.transform;
+            o.localPosition = new Vector3(10.8f, 0, 0);
             held = target;
             target = null;
         }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - TrackPart
   - Robot
+  - Prey
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Robot
   - Terrain
   - TerrainPassable
-  - 
+  - Water
   - 
   - 
   - 

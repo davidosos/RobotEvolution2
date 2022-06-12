@@ -13,6 +13,7 @@ public class SandWormConstructor : MonoBehaviour
     public Rigidbody Construct(int length)
     {
         GameObject head = Instantiate(start, transform);
+        SandWormAI ai = head.GetComponent<SandWormAI>();
 
         SandWormPart lastPart = head.GetComponent<SandWormPart>();
 
@@ -23,6 +24,12 @@ public class SandWormConstructor : MonoBehaviour
 
             SandWormPart s = midObject.GetComponent<SandWormPart>();
             lastPart.joint_f.connectedBody = s.joint_m.GetComponent<Rigidbody>();
+
+            SandWormDetector detector = midObject.GetComponent<SandWormDetector>();
+            if(detector != null && ai != null)
+            {
+                detector.ai = ai;
+            }
 
             lastPart = s;
         }

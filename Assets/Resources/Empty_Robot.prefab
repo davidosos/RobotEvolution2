@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1252685912382320474}
   m_Layer: 7
   m_Name: Empty_Robot
-  m_TagString: Untagged
+  m_TagString: Robot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65,10 +65,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedMult: 1
+  rotSpeed: 1
   tracks: {fileID: 1252685912382320473}
   rigid: {fileID: 0}
   horizontal: 0
   vertical: 0
+  isConscious: 0
 --- !u!114 &1252685912382320473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +98,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12ca61a74e0facd4da85b0c67972d46e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  genePool:
+    prefab: NULL
+    materials: []
+    resistance: 0
+    areoDyn: 0
+    statChange: 0
+    childGenes: []
+    childCount: 0
+    geneGroup: NULL
+    requiredGeneGroups: []
 --- !u!1 &2134856089424066467
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,8 +154,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sens: 80
-  maxDist: 9.5
+  minDist: 9.5
+  maxDist: 19
+  dist: 0
   cam: {fileID: 2134856089437739125}
+  controller: {fileID: 0}
 --- !u!1 &2134856089437739125
 GameObject:
   m_ObjectHideFlags: 0
