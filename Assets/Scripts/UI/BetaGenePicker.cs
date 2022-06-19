@@ -43,6 +43,13 @@ public class BetaGenePicker : MonoBehaviour
         ConstructTree();
     }
 
+    public void UpdateTree()
+    {
+        //Apply changes
+        current = GetModifiedGenePool();
+        ConstructTree();
+    }
+
     void ConstructTree()
     {
         Destroy(currentTree);
@@ -64,6 +71,7 @@ public class BetaGenePicker : MonoBehaviour
         option.editMe = current;
         option.geneIndex = geneIndex;
         option.parent = parentOption;
+        option.picker = this;
 
         if (parentOption != null)
         {
@@ -74,7 +82,7 @@ public class BetaGenePicker : MonoBehaviour
         if(where == last)
         {
             //Full circle
-            for(int a = 0; a < current.childCount; a++)
+            for(int a = 0; a < current.childGenes.Length; a++)
             {
                 float angle = 2 * Mathf.PI * a / current.childGenes.Length;
                 float x = Mathf.Cos(angle) * uiOptionDist;
@@ -91,7 +99,7 @@ public class BetaGenePicker : MonoBehaviour
             //Calculate dead angle
             Vector3 toParent = last - where;
             float startAngle = Mathf.Asin(toParent.normalized.x) + spaceAngle;
-            for (int a = 0; a < current.childCount; a++)
+            for (int a = 0; a < current.childGenes.Length; a++)
             {
                 float angle = 2 * (Mathf.PI - spaceAngle) * a / current.childGenes.Length;
                 float x = Mathf.Cos(angle + startAngle) * uiOptionDist;

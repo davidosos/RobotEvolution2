@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8973122328063669980}
   - component: {fileID: 6584852538108707350}
   - component: {fileID: 6584852538108707351}
+  - component: {fileID: -5226630628459051265}
   m_Layer: 0
   m_Name: Agility_Body
   m_TagString: Untagged
@@ -105,3 +106,17 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0, w: 0}
   resistance: 0
   areodynamicity: 0
+--- !u!64 &-5226630628459051265
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4639521318799352771}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5495902117074765545, guid: 951451016a4ba7a41be90901d30742ff, type: 3}

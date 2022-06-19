@@ -12,6 +12,7 @@ public class TreeOption : MonoBehaviour
     public int geneIndex = -1;
     public Button button;
     public Text text;
+    public BetaGenePicker picker;
 
     private GameObject selector;
 
@@ -75,6 +76,7 @@ public class TreeOption : MonoBehaviour
                 }
             }
         }
+        picker.UpdateTree();
     }
     public void UpdateLook()
     {
