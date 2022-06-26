@@ -778,6 +778,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 957112423003005910}
+  - component: {fileID: 3426844118971910937}
   m_Layer: 7
   m_Name: Agility_Tracks
   m_TagString: Untagged
@@ -803,6 +804,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3426844118971910937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4306418024779068885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e30787a74b7eff469d82c344f239cdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partConnections: []
+  partConnectionRots: []
+  resistance: 0
+  areodynamicity: 0
+  partVolume: 34.1602
 --- !u!1 &5242453810002455313
 GameObject:
   m_ObjectHideFlags: 0

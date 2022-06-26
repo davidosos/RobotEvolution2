@@ -36,6 +36,7 @@ public class RobotConstructor : MonoBehaviour
         newPart.transform.localPosition = position;
         newPart.transform.localRotation = rotation;
         RobotPartInfo rInfo = newPart.GetComponent<RobotPartInfo>();
+        GetComponent<WaterBuoyancy>().volume += rInfo.partVolume;
         if(rInfo == null)
         {
             rInfo = newPart.AddComponent<RobotPartInfo>();

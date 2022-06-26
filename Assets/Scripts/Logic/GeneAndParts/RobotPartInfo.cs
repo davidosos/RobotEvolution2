@@ -8,4 +8,5 @@ public class RobotPartInfo : MonoBehaviour
     public Quaternion[] partConnectionRots;
     public int resistance;
     public int areodynamicity;
+    public float partVolume;
 }

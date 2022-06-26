@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5697895831625849790}
   - component: {fileID: 6198966789763797265}
   - component: {fileID: 6198966789763797264}
+  - component: {fileID: 3884557197694817326}
   m_Layer: 7
   m_Name: Basic_Camera
   m_TagString: Untagged
@@ -99,3 +100,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3, y: 2.4522464, z: 1.8360704}
   m_Center: {x: 0, y: -0.3080881, z: 0}
+--- !u!114 &3884557197694817326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8951988426769979097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e30787a74b7eff469d82c344f239cdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partConnections: []
+  partConnectionRots: []
+  resistance: 0
+  areodynamicity: 0
+  partVolume: 9.3

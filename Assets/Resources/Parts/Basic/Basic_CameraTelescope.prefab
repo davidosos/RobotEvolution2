@@ -117,3 +117,4 @@ MonoBehaviour:
   - {x: 0.34202015, y: 0.000000026125091, z: 0.000000026125091, w: 0.9396926}
   resistance: 0
   areodynamicity: 0
+  partVolume: 0.2
